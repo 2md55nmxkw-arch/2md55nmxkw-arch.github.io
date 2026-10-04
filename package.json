@@ -1,0 +1,14 @@
+{
+  "name": "2md-portfolio",
+  "private": true,
+  "scripts": {
+    "build": "npm run check && node build.mjs",
+    "check": "tsc --noEmit",
+    "test": "npm run build && node --test tests/site.test.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12",
+    "playwright": "1.56.1",
+    "typescript": "5.9.3"
+  }
+}

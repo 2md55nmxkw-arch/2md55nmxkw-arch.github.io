@@ -1,0 +1,25 @@
+{
+  "name": "2md.arch — Farid Fatikhov",
+  "short_name": "2md.arch",
+  "description": "Portfolio of Farid Fatikhov, engineer-developer and CyberSecurity Engineer from Kazakhstan.",
+  "start_url": "index.html",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#0a0810",
+  "theme_color": "#0a0810",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+node_modules/
+backups/
+.loop-staging/
+.design-review/
+link.txt
+tests/fishaaaudio.txt
+tests/voice-lines-to-record.txt
+*.log
+dist/

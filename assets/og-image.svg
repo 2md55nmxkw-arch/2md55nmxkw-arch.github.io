@@ -1,0 +1,51 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="2md.arch — Farid Fatikhov">
+  <!-- Background: page tone with a soft violet aurora -->
+  <rect width="1200" height="630" fill="#0a0810"/>
+  <radialGradient id="aurora" cx="0.82" cy="0.1" r="1.1" gradientUnits="userSpaceOnUse" x1="984" y1="63" x2="1320" y2="756">
+    <stop stop-color="#5a3bb8" stop-opacity="0.55"/>
+    <stop offset="0.5" stop-color="#2b1a55" stop-opacity="0.35"/>
+    <stop offset="1" stop-color="#0a0810" stop-opacity="0"/>
+  </radialGradient>
+  <rect width="1200" height="630" fill="url(#aurora)"/>
+  <g opacity="0.5">
+    <circle cx="150" cy="520" r="2.2" fill="#a78bfa"/>
+    <circle cx="320" cy="470" r="1.6" fill="#f4f1fa" opacity="0.7"/>
+    <circle cx="540" cy="560" r="1.8" fill="#a78bfa" opacity="0.8"/>
+    <circle cx="760" cy="500" r="1.4" fill="#f4f1fa" opacity="0.5"/>
+    <circle cx="1020" cy="570" r="2" fill="#a78bfa" opacity="0.6"/>
+    <circle cx="1090" cy="540" r="1.4" fill="#f4f1fa" opacity="0.4"/>
+    <circle cx="90" cy="480" r="1.4" fill="#f4f1fa" opacity="0.5"/>
+  </g>
+
+  <!-- Arch logo, scaled from assets/logo.svg -->
+  <g transform="translate(96, 105) scale(1.15)">
+    <path d="M106.935 0H63.0644L-0.000111731 183L35.1553 183C35.1849 182.877 55.0942 100.175 61.3083 81.8441C67.527 63.5 102.865 64.4676 108.418 81.8441C113.97 99.2206 135.655 183 135.655 183L170 183L106.935 0Z" fill="url(#arch)"/>
+    <path d="M35.1553 183L52.9999 183C52.9999 183 66.3052 114 69.6545 101.5C73.0039 89 96.1186 87.5 99.6545 101.5L116.155 183L135.655 183C135.655 183 113.97 99.2206 108.418 81.8441C102.865 64.4676 67.527 63.5 61.3083 81.8441C55.0942 100.175 35.1849 182.877 35.1553 183Z" fill="url(#archDark)"/>
+  </g>
+
+  <!-- Headline block -->
+  <text x="96" y="415" font-family="Onest, 'Segoe UI', system-ui, sans-serif" font-size="64" font-weight="650" letter-spacing="-2" fill="#f4f1fa">Farid Fatikhov</text>
+  <text x="97" y="465" font-family="Onest, 'Segoe UI', system-ui, sans-serif" font-size="27" font-weight="550" fill="#d9ccff">Engineer-developer &amp; CyberSecurity Engineer</text>
+
+  <!-- Footer row: brand, stack, location -->
+  <line x1="96" y1="525" x2="1104" y2="525" stroke="#ffffff" stroke-opacity="0.12"/>
+  <g font-family="Onest, 'Segoe UI', system-ui, sans-serif" font-size="22" font-weight="550">
+    <text x="96" y="565" fill="#a78bfa">2md.arch</text>
+    <circle cx="260" cy="558" r="3" fill="#ffffff" opacity="0.35"/>
+    <text x="284" y="565" fill="#a39bb5">C++ · TypeScript · Reverse engineering</text>
+    <circle cx="560" cy="558" r="3" fill="#ffffff" opacity="0.35"/>
+    <text x="584" y="565" fill="#a39bb5">Kazakhstan</text>
+  </g>
+
+  <defs>
+    <linearGradient id="arch" x1="85" y1="0" x2="85" y2="183" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8F63F2"/>
+      <stop offset="1" stop-color="#6A3FC6"/>
+    </linearGradient>
+    <linearGradient id="archDark" x1="85" y1="0" x2="85" y2="183" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0D0C14"/>
+      <stop offset="0.6" stop-color="#1B1A26"/>
+      <stop offset="1" stop-color="#1B1A26" stop-opacity="0.15"/>
+    </linearGradient>
+  </defs>
+</svg>
