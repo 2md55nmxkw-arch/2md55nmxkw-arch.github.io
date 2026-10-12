@@ -1,5 +1,5 @@
 import { build } from "esbuild";
-import { readFile, readdir, mkdir, writeFile, access } from "node:fs/promises";
+import { readFile, readdir, mkdir, writeFile, cp } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
@@ -12,6 +12,7 @@ const result = await build({
   target: "es2020",
   write: false,
   legalComments: "none",
+  minify: true,
 });
 const script = result.outputFiles[0].text;
 
@@ -65,6 +66,8 @@ css = css.replace(/url\("(assets\/[^"\s]+)"\)/g, (original, source) => {
   return `url("${url}")`;
 });
 let html = await readFile(path.join(root, "index.html"), "utf8");
+// Rebuilding must replace stats, rather than append another block each time.
+html = html.replace(/\s*<script id="repo-stats" type="application\/json">[\s\S]*?<\/script>/g, "");
 for (const marker of ['<link rel="stylesheet" href="style.css" />', '<script src="scripts.js"></script>']) {
   if (!html.includes(marker)) throw new Error(`Missing build marker: ${marker}`);
 }
@@ -72,6 +75,15 @@ for (const marker of ['<link rel="stylesheet" href="style.css" />', '<script src
 const statsScript = `<script id="repo-stats" type="application/json">${JSON.stringify(repoStats).replace(/</g, "\\u003c")}</script>`;
 html = html.replace("<script src=\"scripts.js\"></script>", () => `${statsScript}\n<script src="scripts.js"></script>`);
 await writeFile(path.join(root, "index.html"), html);
+// Deploy this directory. Keep the large offline artifact outside the web root.
+const site = path.join(root, "dist/site");
+await mkdir(site, { recursive: true });
+await writeFile(path.join(site, "index.html"), html);
+await writeFile(path.join(site, "scripts.js"), script);
+for (const file of ["style.css", "sw.js", "site.webmanifest"]) {
+  await cp(path.join(root, file), path.join(site, file));
+}
+await cp(path.join(root, "assets"), path.join(site, "assets"), { recursive: true });
 html = html.replace('<link rel="stylesheet" href="style.css" />', () => `<style>\n${css}\n</style>`);
 html = html.replace(/(src|data-src|href)="(assets\/[^"\s]+)"/g, (original, attribute, source) => {
   const url = embedded[source];
@@ -85,4 +97,4 @@ html = html.replace('<script src="scripts.js"></script>', () =>
 await mkdir(path.join(root, "dist"), { recursive: true });
 await writeFile(path.join(root, "scripts.js"), script);
 await writeFile(path.join(root, "dist/index.single-file.html"), html);
-console.log("Built scripts.js and dist/index.single-file.html");
+console.log("Built scripts.js, dist/site/ (hosting), and dist/index.single-file.html (offline)");

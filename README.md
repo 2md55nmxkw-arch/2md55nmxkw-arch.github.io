@@ -3,6 +3,11 @@
 Personal portfolio: a full-bleed seasonal video hero with Mika, followed by a calm dark page with soft violet surfaces, three project cards with schematic diagrams, a compact toolkit and a closing contact panel.
 
 ## Run
+For Vercel, run `npm run build` and deploy `dist/site` (configured in `vercel.json`).
+This serves a small HTML document with separate media assets. Do not deploy
+`dist/index.single-file.html` as the homepage: it embeds every video and audio clip
+and is intended only for offline distribution.
+
 Just open `index.html` in a browser. Or serve the folder:
 
     python3 -m http.server 8080   # then open http://localhost:8080
