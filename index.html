@@ -3,128 +3,224 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>2md55.arch — every piece was a pawn once</title>
-  <meta name="description" content="2md55.arch: reverse engineering, Unity IL2CPP, Luau and C++ tooling. An offline IL2CPP dumper, a mod loader and a Luau emulator.">
+  <title>2md55.arch vs the binary — an annotated game</title>
+  <meta name="description" content="2md55.arch: reverse engineering, Unity IL2CPP, Luau and C++ tooling. A portfolio played as a seven-move chess game that ends in mate.">
   <meta name="theme-color" content="#000000">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="2md55.arch — every piece was a pawn once">
-  <meta property="og:description" content="Reverse engineering, Unity IL2CPP, Luau and C++ tooling.">
+  <meta property="og:title" content="2md55.arch vs the binary — an annotated game">
+  <meta property="og:description" content="Reverse engineering, Unity IL2CPP, Luau and C++ tooling. Seven moves, one mate.">
   <meta property="og:image" content="https://2md55nmxkw-arch.github.io/assets/og-image.png">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/fonts/montserrat-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="is-intro">
-  <a class="skip" href="#work">Skip to the work</a>
+  <a class="skip" href="#move-3" data-at="3.95">Skip to the work</a>
 
-  <header class="nav">
-    <a class="nav__logo" href="#top">2md55.arch</a>
-    <nav aria-label="Sections">
-      <a href="#about">about</a>
-      <a href="#work">work</a>
-      <a href="#stack">stack</a>
-      <a href="#contact">contact</a>
-    </nav>
-  </header>
+  <!-- The whole site is one annotated chess game: Légal's mate, seven moves. Scrolling plays the game on the
+       small board in the score sheet. White's moves are mine, black's replies are the binary's, and every
+       half-move is a scene. On wide screens the stage is pinned and the scenes cut into each other like shots
+       of a film; on small screens they simply stack. -->
+  <main class="film">
+    <div class="stage">
 
-  <main>
-    <!-- 1 · title: the black king in front of the name, focus pulls from the king to the word -->
-    <section class="hero" id="top" aria-label="Intro">
-      <canvas class="hero__flick" width="336" height="336" aria-hidden="true"></canvas>
-      <h1 class="hero__title"><span>2MD55.ARCH</span></h1>
-      <img class="hero__king" src="assets/pieces/b_king.png" alt="" width="520" height="1102">
-      <p class="hero__sub mono">reverse engineering · unity il2cpp · luau · c++</p>
-      <span class="tag tag--pointer mono" aria-hidden="true" data-track>x: 0 y: 0</span>
-      <span class="tag tag--king mono" aria-hidden="true">x: 412 y: 688</span>
-      <a class="hero__next mono" href="#about">scroll <span aria-hidden="true">↓</span></a>
-    </section>
+      <aside class="rail" aria-label="Game score and navigation">
+        <p class="rail__title">2md55.arch <span>vs the binary</span></p>
+        <ol class="sheet">
+          <li><b>1.</b><a href="#move-1" data-at="0">e4</a><a href="#move-1" data-at="0.75">e5</a><em>title</em></li>
+          <li><b>2.</b><a href="#move-2" data-at="1.9">Nf3</a><a href="#move-2" data-at="2.75">d6</a><em>about</em></li>
+          <li><b>3.</b><a href="#move-3" data-at="3.95">Bc4</a><a href="#move-3b" data-at="5.35">Bg4</a><em>luauemu</em></li>
+          <li><b>4.</b><a href="#move-4" data-at="6.45">Nc3</a><a href="#move-4b" data-at="7.95">g6</a><em>modloader</em></li>
+          <li><b>5.</b><a href="#move-5" data-at="8.95">Nxe5<i>!!</i></a><a href="#move-5b" data-at="10.4">Bxd1</a><em>il2dump</em></li>
+          <li><b>6.</b><a href="#move-6" data-at="12">Bxf7+</a><a href="#move-6b" data-at="13.4">Ke7</a><em>stack</em></li>
+          <li><b>7.</b><a href="#move-7" data-at="15">Nd5#</a><span>1–0</span><em>your move</em></li>
+        </ol>
+        <div class="mini" aria-hidden="true"></div>
+        <p class="rail__state mono" aria-hidden="true">starting position</p>
+      </aside>
 
-    <!-- 2 · wall of text with the datamosh pawn: it follows the pointer, its trail is its own past frames -->
-    <section class="wall" id="about" aria-labelledby="about-title">
-      <h2 class="sr" id="about-title">About</h2>
-      <div class="wall__text" aria-hidden="true"></div>
-      <canvas class="wall__fx" aria-hidden="true"></canvas>
-      <p class="wall__note">
-        I take games and runtimes apart, then write the tools I wanted to have.
-        Mostly C++ and Luau, with TypeScript around the edges.
-      </p>
-    </section>
+      <div class="view">
+        <!-- 1. e4 · title: the black king in front of the name, focus pulls from the king to the word -->
+        <section class="scene scene--title" id="move-1" aria-label="Intro">
+          <canvas class="hero__flick" width="336" height="336" aria-hidden="true"></canvas>
+          <b class="num" aria-hidden="true">1</b>
+          <h1 class="hero__title"><span>2MD55.ARCH</span></h1>
+          <img class="hero__king" src="assets/pieces/b_king.png" alt="" width="520" height="1102">
+          <p class="hero__sub mono">reverse engineering · unity il2cpp · luau · c++</p>
+          <span class="tag tag--king mono" aria-hidden="true">x: 412 y: 688</span>
+          <a class="hero__next mono" href="#move-2" data-at="1.9">1. e4 — scroll to play <span aria-hidden="true">↓</span></a>
+        </section>
 
-    <!-- 3 · projects as pieces; each figure strobes through fills like the queen in the header -->
-    <section class="work" id="work" aria-labelledby="work-title">
-      <header class="work__head">
-        <h2 id="work-title">Pieces on the board.</h2>
-        <p class="mono">three tools built by taking other things apart</p>
-      </header>
+        <!-- 2. Nf3 · about: wall of text; the datamosh pawn flies in and brakes, its trail is its own last frames -->
+        <section class="scene scene--wall" id="move-2" aria-labelledby="about-title">
+          <h2 class="sr" id="about-title">About</h2>
+          <div class="wall__text" aria-hidden="true"></div>
+          <div class="wall__cover wall__cover--rest" aria-hidden="true"></div>
+          <div class="wall__cover wall__cover--line" aria-hidden="true"></div>
+          <div class="wall__dim" aria-hidden="true"></div>
+          <canvas class="wall__fx" aria-hidden="true"></canvas>
+          <p class="wall__note"><b class="mono">2. Nf3 — development</b>
+            I take games and runtimes apart, then write the tools I wanted to have.
+            Mostly C++ and Luau, with TypeScript around the edges.
+          </p>
+        </section>
 
-      <article class="piece">
-        <div class="piece__fig"><canvas data-sprite="assets/pieces/w_king.png" aria-hidden="true"></canvas></div>
-        <div class="piece__body">
-          <p class="piece__kicker mono">01 · king · reverse engineering</p>
-          <h3>endfield-il2dump</h3>
-          <p>An offline IL2CPP metadata dumper for Unity x64 on Windows. It reads <code>GameAssembly.dll</code> and <code>global-metadata.dat</code> straight from disk: the game is never launched, nothing is injected and no admin rights are needed.</p>
-          <p class="piece__meta mono"><span>C++</span><span data-stars="endfield-il2dump">★ 3</span></p>
-          <a class="btn mono" href="https://github.com/2md55nmxkw-arch/endfield-il2dump">open on GitHub <span aria-hidden="true">↗</span></a>
-        </div>
-      </article>
+        <!-- flash cut: two frames of an extreme close-up, as in the header -->
+        <div class="scene scene--flash" aria-hidden="true"><img src="assets/pieces/w_queen_big.png" alt=""></div>
 
-      <article class="piece piece--flip">
-        <div class="piece__fig"><canvas data-sprite="assets/pieces/w_queen_big.png" aria-hidden="true"></canvas></div>
-        <div class="piece__body">
-          <p class="piece__kicker mono">02 · queen · systems</p>
-          <h3>Loliland-ModLoader</h3>
-          <p>A mod loader for the Loliland launcher build. Any mod can be loaded as long as it fits the build: the work happens at the boundary between an application and its extensions.</p>
-          <p class="piece__meta mono"><span>C++</span><span data-stars="Loliland-ModLoader">★ 2</span></p>
-          <a class="btn mono" href="https://github.com/2md55nmxkw-arch/Loliland-ModLoader">open on GitHub <span aria-hidden="true">↗</span></a>
-        </div>
-      </article>
+        <!-- 3–5 · the work. White's move is the project: a figure that strobes through fills.
+             Black's reply is how it works: a slower shot that the scroll writes out line by line. -->
+        <section class="scene scene--piece" id="move-3" aria-labelledby="p1">
+          <b class="num" aria-hidden="true">3</b>
+          <canvas class="pc__fig" data-sprite="assets/pieces/w_bishop.png" aria-hidden="true"></canvas>
+          <h2 class="pc__name" id="p1">LuauEmu</h2>
+          <div class="pc__note">
+            <p class="pc__move mono"><b>3. Bc4</b><i class="q q--int">!?</i> interesting</p>
+            <p>A Luau script emulator that runs outside Roblox, on top of Lune. The bishop leaves its own diagonal: a language taken out of the environment it was made for.</p>
+            <p class="pc__meta mono"><span>lang · luau</span><span data-stars="LuauEmu">★ 1</span></p>
+            <a class="pc__link mono" href="https://github.com/2md55nmxkw-arch/LuauEmu">open on GitHub <span aria-hidden="true">↗</span></a>
+          </div>
+        </section>
 
-      <article class="piece">
-        <div class="piece__fig"><canvas data-sprite="assets/pieces/w_rook.png" aria-hidden="true"></canvas></div>
-        <div class="piece__body">
-          <p class="piece__kicker mono">03 · rook · language tooling</p>
-          <h3>LuauEmu</h3>
-          <p>A Luau script emulator that runs outside Roblox, on top of Lune. It takes a language beyond the environment it was made for.</p>
-          <p class="piece__meta mono"><span>Luau</span><span data-stars="LuauEmu">★ 1</span></p>
-          <a class="btn mono" href="https://github.com/2md55nmxkw-arch/LuauEmu">open on GitHub <span aria-hidden="true">↗</span></a>
-        </div>
-      </article>
+        <section class="scene scene--detail dt--emu" id="move-3b" aria-labelledby="d1">
+          <p class="dt__move mono"><b>3… Bg4</b>the binary pins the knight</p>
+          <h3 class="dt__head" id="d1">A place file goes in.<br>A live game tree comes out.</h3>
+          <p class="term mono"><span class="term__p" aria-hidden="true">$</span><span class="term__cmd">lune run src/main.luau MyPlace.rbxlx MyScript.luau</span><i class="term__caret" aria-hidden="true"></i></p>
+          <ol class="steps">
+            <li><b class="mono">01 parse</b><span>A pure-Lua XML parser reads a real <code>.rbxlx</code> place file.</span></li>
+            <li><b class="mono">02 build</b><span>The Instance tree is rebuilt: <code>game</code>, <code>workspace</code>, services, signals.</span></li>
+            <li><b class="mono">03 run</b><span>Your script runs on Lune with Roblox globals and UNC functions. No client is started.</span></li>
+          </ol>
+          <div class="dt__side">
+            <pre class="tree" aria-hidden="true"><span>game</span><span>├─ Workspace</span><span>│  ├─ Baseplate</span><span>│  └─ SpawnLocation</span><span>├─ Players</span><span>├─ RunService</span><span>├─ HttpService</span><span>├─ UserInputService</span><span>├─ TweenService <em>stub</em></span><span>└─ DataStoreService <em>stub</em></span></pre>
+            <ul class="dt__count">
+              <li><b data-count="44">44</b><span class="mono">UNC functions</span></li>
+              <li><b data-count="8">8</b><span class="mono">services</span></li>
+              <li><b data-count="0">0</b><span class="mono">Roblox clients</span></li>
+            </ul>
+          </div>
+          <div class="ticker" aria-hidden="true"><p></p><p></p></div>
+        </section>
 
-      <p class="work__more mono"><a href="https://github.com/2md55nmxkw-arch?tab=repositories">all repositories <span aria-hidden="true">↗</span></a></p>
-    </section>
+        <section class="scene scene--piece" id="move-4" aria-labelledby="p2">
+          <b class="num" aria-hidden="true">4</b>
+          <canvas class="pc__fig" data-sprite="assets/pieces/w_knight_a.png" aria-hidden="true"></canvas>
+          <h2 class="pc__name" id="p2">ModLoader</h2>
+          <div class="pc__note">
+            <p class="pc__move mono"><b>4. Nc3</b><i class="q q--good">!</i> good move</p>
+            <p>Loliland-ModLoader: a mod loader for the Loliland launcher build. Any mod can be loaded as long as it fits the build. The knight jumps over what stands in the way: the boundary between an application and its extensions.</p>
+            <p class="pc__meta mono"><span>lang · c++</span><span data-stars="Loliland-ModLoader">★ 2</span></p>
+            <a class="pc__link mono" href="https://github.com/2md55nmxkw-arch/Loliland-ModLoader">open on GitHub <span aria-hidden="true">↗</span></a>
+          </div>
+        </section>
 
-    <!-- 4 · the lineup: pieces pop in one by one -->
-    <section class="stack" id="stack" aria-labelledby="stack-title">
-      <h2 id="stack-title">Every piece was a pawn once.</h2>
-      <ul class="lineup">
-        <li style="--h:.53"><img src="assets/pieces/w_pawn.png" alt="" loading="lazy"><span class="mono">python</span></li>
-        <li style="--h:.6"><img src="assets/pieces/w_rook.png" alt="" loading="lazy"><span class="mono">typescript</span></li>
-        <li style="--h:1"><img src="assets/pieces/w_king.png" alt="" loading="lazy"><span class="mono">c++</span></li>
-        <li style="--h:.84"><img src="assets/pieces/w_queen.png" alt="" loading="lazy"><span class="mono">luau</span></li>
-        <li style="--h:.76"><img src="assets/pieces/w_bishop.png" alt="" loading="lazy"><span class="mono">lua</span></li>
-        <li style="--h:.62"><img src="assets/pieces/w_knight_a.png" alt="" loading="lazy"><span class="mono">il2cpp</span></li>
-      </ul>
-    </section>
+        <section class="scene scene--detail dt--loader" id="move-4b" aria-labelledby="d2">
+          <p class="dt__move mono"><b>4… g6</b>the binary puts up a wall of pawns</p>
+          <h3 class="dt__head" id="d2">Four files.<br>One jump over the wall.</h3>
+          <svg class="hops__path" aria-hidden="true"><path/></svg>
+          <ol class="hops">
+            <li><b class="mono">01</b><code>LOAD_MODS.bat</code><span>the one script you run</span></li>
+            <li><b class="mono">02</b><code>LoliLoader.exe</code><span>native loader, C++17</span></li>
+            <li><b class="mono">03</b><code>ResolverAgent.jar</code><span>runtime agent</span></li>
+            <li><b class="mono">04</b><code>mods/*.jar</code><span>your mods, as they are</span></li>
+          </ol>
+          <i class="ghost" aria-hidden="true"></i><i class="ghost" aria-hidden="true"></i><i class="ghost" aria-hidden="true"></i><i class="ghost" aria-hidden="true"></i><i class="ghost" aria-hidden="true"></i>
+          <img class="hopper" src="assets/pieces/w_knight_a.png" alt="" aria-hidden="true">
+          <p class="dt__foot mono">builds with msvc or mingw-w64 · launcher path and mods directory can be set with two environment variables</p>
+        </section>
 
-    <!-- 5 · contact: hands close in from the frame edges -->
-    <section class="contact" id="contact" aria-labelledby="contact-title">
-      <div class="hand hand--a" aria-hidden="true"><canvas data-hand="assets/hands/hand_top.png" data-rot="76"></canvas><span class="mono">x: 1087 y: 0</span></div>
-      <div class="hand hand--b" aria-hidden="true"><canvas data-hand="assets/hands/hand_bottom.png" data-rot="64" data-flip></canvas><span class="mono">x: 0 y: 486</span></div>
-      <div class="hand hand--c" aria-hidden="true"><canvas data-hand="assets/hands/hand_bottom.png" data-rot="-34"></canvas><span class="mono">x: 1144 y: 618</span></div>
-      <h2 class="contact__title" id="contact-title">Your move.</h2>
-      <ul class="contact__links">
-        <li><a href="https://github.com/2md55nmxkw-arch">GitHub <span aria-hidden="true">↗</span></a></li>
-        <li><button type="button" id="discord" data-handle="@mrxrer">Discord · @mrxrer <span class="mono">copy</span></button></li>
-        <li><a href="https://github.com/2md55nmxkw-arch#readme">Play me at chess <span aria-hidden="true">↗</span></a></li>
-      </ul>
-      <p class="contact__status mono" id="discord-status" role="status" aria-live="polite"></p>
-    </section>
+        <section class="scene scene--piece" id="move-5" aria-labelledby="p3">
+          <b class="num" aria-hidden="true">5</b>
+          <canvas class="pc__fig" data-sprite="assets/pieces/w_queen_big.png" aria-hidden="true"></canvas>
+          <h2 class="pc__name" id="p3">il2dump</h2>
+          <div class="pc__note">
+            <p class="pc__move mono"><b>5. Nxe5</b><i class="q q--brill">!!</i> brilliant — the queen is offered</p>
+            <p>endfield-il2dump: an offline IL2CPP metadata dumper for Unity x64 on Windows. It reads <code>GameAssembly.dll</code> and <code>global-metadata.dat</code> straight from disk. The game is never launched, nothing is injected, no admin rights are needed.</p>
+            <p class="pc__meta mono"><span>lang · c++</span><span data-stars="endfield-il2dump">★ 3</span></p>
+            <a class="pc__link mono" href="https://github.com/2md55nmxkw-arch/endfield-il2dump">open on GitHub <span aria-hidden="true">↗</span></a>
+            <a class="pc__link mono" href="https://github.com/2md55nmxkw-arch?tab=repositories">all repositories <span aria-hidden="true">↗</span></a>
+          </div>
+        </section>
+
+        <section class="scene scene--detail dt--dump" id="move-5b" aria-labelledby="d3">
+          <p class="dt__move mono"><b>5… Bxd1</b>the binary takes the queen</p>
+          <h3 class="dt__head" id="d3">It never runs the game.<br>It reads it.</h3>
+          <div class="hex mono" aria-hidden="true">
+            <p class="hex__name">global-metadata.dat</p>
+            <div class="hex__body"><pre class="hex__dim"></pre><div class="hex__lit"><pre></pre></div><i class="hex__scan"></i></div>
+            <p class="hex__legend"><b class="h1">AF 1B B1 FA</b> sanity 0xFAB11BAF <b class="h2">1D 00 00 00</b> version 29</p>
+          </div>
+          <div class="dump mono">
+            <p class="dump__name">dump.cs</p>
+            <pre><span><em>// Namespace: System</em></span><span>public class Object <em>// TypeDefIndex: 38983, Size: 0x10</em></span><span>{</span><span>    <em>// Methods</em></span><span>    <em>// RVA: 0x03D71010 Offset: 0x03D6FA10</em></span><span>    <em>// VA: 0x0000000183D71010 Slot: 0</em></span><span>    public virtual bool Equals(object obj) { }</span><span>}</span></pre>
+          </div>
+          <ul class="outs mono">
+            <li>dump.cs</li><li>script.json <span>→ IDA / Ghidra</span></li><li>stringliteral.json</li><li>dump.log</li>
+          </ul>
+          <p class="dt__foot mono">metadata v24–31, unencrypted · windows x64 · tested on Arknights: Endfield (Unity 2022, v29)</p>
+        </section>
+
+        <!-- 6. Bxf7+ · the stack: pieces pop in one by one; any of them can be dragged and leaves a trail -->
+        <section class="scene scene--stack" id="move-6" aria-labelledby="stack-title">
+          <b class="num" aria-hidden="true">6</b>
+          <h2 id="stack-title">Every piece was a pawn once.</h2>
+          <p class="stack__hint mono" aria-hidden="true">6. Bxf7+ — drag a piece</p>
+          <ul class="lineup">
+            <li style="--h:.53"><img src="assets/pieces/w_pawn.png" alt="" draggable="false"><span class="mono">python</span></li>
+            <li style="--h:.6"><img src="assets/pieces/w_rook.png" alt="" draggable="false"><span class="mono">typescript</span></li>
+            <li style="--h:1"><img src="assets/pieces/w_king.png" alt="" draggable="false"><span class="mono">c++</span></li>
+            <li style="--h:.84"><img src="assets/pieces/w_queen.png" alt="" draggable="false"><span class="mono">luau</span></li>
+            <li style="--h:.76"><img src="assets/pieces/w_bishop.png" alt="" draggable="false"><span class="mono">lua</span></li>
+            <li style="--h:.62"><img src="assets/pieces/w_knight_a.png" alt="" draggable="false"><span class="mono">il2cpp</span></li>
+          </ul>
+          <canvas class="stack__fx" aria-hidden="true"></canvas>
+        </section>
+
+        <!-- 6… Ke7 · material: code by language, and the last 64 days as the 64 squares of a board (both live from GitHub) -->
+        <section class="scene scene--material" id="move-6b" aria-labelledby="mat-title">
+          <p class="dt__move mono"><b>6… Ke7</b>the king has to walk</p>
+          <h2 id="mat-title">Material.</h2>
+          <ul class="mat">
+            <li style="--c:#f34b7d"><span>C++</span><i></i><b class="mono">40%</b></li>
+            <li style="--c:#00a2ff"><span>Luau</span><i></i><b class="mono">26%</b></li>
+            <li style="--c:#3178c6"><span>TypeScript</span><i></i><b class="mono">20%</b></li>
+            <li style="--c:#f1e05a"><span>JavaScript</span><i></i><b class="mono">14%</b></li>
+          </ul>
+          <div class="days">
+            <div class="days__board" aria-hidden="true"></div>
+            <p class="mono"><b id="days-total">81</b> moves in the last 64 days. one square is one day.</p>
+          </div>
+          <p class="dt__foot mono">material = share of code by language across public repositories · every commit is a move</p>
+        </section>
+
+        <!-- 7. Nd5# · contact: mate on the board, hands close in from the frame edges -->
+        <section class="scene scene--contact" id="move-7" aria-labelledby="contact-title">
+          <div class="hand hand--a" aria-hidden="true"><canvas data-hand="assets/hands/hand_top.png" data-rot="76"></canvas><span class="mono">x: 1087 y: 0</span></div>
+          <div class="hand hand--b" aria-hidden="true"><canvas data-hand="assets/hands/hand_bottom.png" data-rot="64" data-flip></canvas><span class="mono">x: 0 y: 486</span></div>
+          <div class="hand hand--c" aria-hidden="true"><canvas data-hand="assets/hands/hand_bottom.png" data-rot="-34"></canvas><span class="mono">x: 1144 y: 618</span></div>
+          <p class="contact__move mono">7. Nd5# — checkmate. the board is yours now</p>
+          <h2 class="contact__title" id="contact-title">Your move.</h2>
+          <ul class="contact__links">
+            <li><a href="https://github.com/2md55nmxkw-arch"><b class="mono">7…</b>GitHub <span aria-hidden="true">↗</span></a></li>
+            <li><button type="button" id="discord" data-handle="@mrxrer"><b class="mono">7…</b>Discord · @mrxrer <span class="mono">copy</span></button></li>
+            <li><a href="https://www.chess.com/member/electronicdiver"><b class="mono">7…</b>Chess.com <em class="mono" id="cc-rating">electronicdiver</em><span aria-hidden="true">↗</span></a></li>
+            <li><a href="https://github.com/2md55nmxkw-arch#readme"><b class="mono">7…</b>Play stockfish in my README <span aria-hidden="true">↗</span></a></li>
+          </ul>
+          <p class="contact__status mono" id="discord-status" role="status" aria-live="polite"></p>
+          <p class="foot mono">
+            <span>© 2026 2md55.arch · the game is Légal's mate</span>
+            <span>chess set by Riley Queen (<a href="https://polyhaven.com/a/chess_set">Poly Haven</a>, CC0) · type: Montserrat (OFL)</span>
+          </p>
+        </section>
+
+        <!-- transitions drawn over the scenes: six blades for the wipe into a reply, one white frame for the mate -->
+        <div class="wipe" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <i class="cut" aria-hidden="true"></i>
+      </div>
+
+      <span class="tag tag--pointer mono" aria-hidden="true">x: 0 y: 0</span>
+    </div>
   </main>
-
-  <footer class="foot mono">
-    <span>© 2026 2md55.arch</span>
-    <span>chess set by Riley Queen (<a href="https://polyhaven.com/a/chess_set">Poly Haven</a>, CC0) · type: Montserrat (OFL)</span>
-  </footer>
 
   <script src="main.js" defer></script>
 </body>
